@@ -19,4 +19,5 @@
 5) удаление заметок
 
 https://user-images.githubusercontent.com/103592396/180797835-eed8c209-0268-43b4-81ea-1565af7b6026.mov
+
 Благодарю за внимание!
