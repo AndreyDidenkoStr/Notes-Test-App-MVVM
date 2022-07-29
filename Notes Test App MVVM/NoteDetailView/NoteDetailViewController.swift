@@ -64,9 +64,12 @@ class NoteDetailViewController: UIViewController {
         title = "Detail"
         view.backgroundColor = .white
         viewModel = NoteDetailViewViewModel()
-        addUI()
+        addUIandDelegate()
         setupConstraints()
         addBurButtons()
+        
+        tapDis()
+        
         if note != nil {
             setValuesWithNote()
         }
@@ -98,13 +101,16 @@ class NoteDetailViewController: UIViewController {
     
     // MARK: - UI
     
-    func addUI() {
+    func addUIandDelegate() {
         
         view.addSubview(datelabel)
         view.addSubview(titleLabel)
         view.addSubview(textLabel)
         view.addSubview(titleTextField)
         view.addSubview(textView)
+        
+        titleTextField.delegate = self
+        textView.delegate = self
     }
     
     // MARK: - Constraints
@@ -158,5 +164,23 @@ class NoteDetailViewController: UIViewController {
         let stringDate = dateFormatter.string(from: date)
         datelabel.text = stringDate
     }
+    
+    // MARK: - Gesture to dismiss Keyboard
+    
+    func tapDis() {
+        let tapScreen = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        view.addGestureRecognizer(tapScreen)
+    }
+    
+    @objc func dismissKeyboard() {
+        titleTextField.endEditing(true)
+        textView.endEditing(true)
+    }
+    
+}
 
+//MARK: - Text Field Delegate and Text View Delegate
+
+extension NoteDetailViewController: UITextFieldDelegate, UITextViewDelegate {
+    
 }
